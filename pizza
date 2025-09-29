@@ -1,0 +1,151 @@
+<html>
+<head>
+  <title>Pizza Hat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+   
+    #logo{
+        margin-left: 180px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffe3ba;
+      line-height: 1.6;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      background-color: #d62828;
+      color: white;
+      padding: 20px;
+      gap: 15px;
+    }
+    header img {
+      width: 70px;
+      height: 70px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #f4a261;
+      padding: 15px 0;
+      gap: 60px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: bold;
+      margin-left: 150px;
+        margin-right: 150px;
+    }
+    .cart-item { display: flex; align-items: center; margin-bottom: 20px; }
+    .cart-item img { width: 200px; margin-right: 20px; padding: 20px;}
+    .item-info { flex: 1; }
+    .qty-controls { display: flex; align-items: center; gap: 10px; }
+    button { padding: 5px 10px; cursor: pointer; }
+    .total { font-size: 20px; margin-top: 30px; color: #d62828;
+        border-width: 5px;
+        border-style: none;
+        border-color: rgb(255, 255, 255);
+        width: 250px;
+        height: 60px;
+        background-color: rgb(255, 255, 255);
+    position: relative;
+    left: 750px;
+    bottom: 200px;}
+    
+    .price { color: red; font-weight: bold; }
+     #border{
+        border-width: 5px;
+        border-style: groove;
+        border-color: red;
+        width: 550px;
+        background-color: rgb(255, 255, 255);
+        overflow: hidden;
+    
+     }
+     #button{
+        position: relative;
+    left: 750px;
+    bottom: 200px;
+    text-decoration: none;
+    border-style: none;
+color: red;}
+    
+     
+
+  </style>
+</head>
+<body>
+  <header>
+    <img id="logo" src="Los_Pollos.webp" alt="Logo" />
+    <h1>Los Pollos Hermanos</h1>
+  </header>
+
+  <nav>
+    <a href="Home.html">Home Page</a>
+    <a href="Mnu.html">Order</a>
+    <a href="Cart.html">Cart</a>
+    <a href="Contact.html">Contact</a>
+  </nav>
+
+  <div id="border">
+  <div class="cart-item" data-price="25000">
+    <img src="https://pngimg.com/uploads/fried_chicken/fried_chicken_PNG14086.png" alt="chicken nugget">
+    <div class="item-info">
+      <div>Chicken Nugget</div>
+      <div class="qty-controls">
+        <button onclick="changeQty(this, -1)">−</button>
+        <span class="qty">0</span>
+        <button onclick="changeQty(this, 1)">+</button>
+        <span class="price">25,000₮</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-item" data-price="35000">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cheeseburger.jpg/800px-Cheeseburger.jpg" alt="burger">
+    <div class="item-info">
+      <div>Classic burger</div>
+      <div class="qty-controls">
+        <button onclick="changeQty(this, -1)">−</button>
+        <span class="qty">0</span>
+        <button onclick="changeQty(this, 1)">+</button>
+        <span class="price">35,000₮</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="total">Нийт:<br> <span id="total">0₮</span></div>
+
+  <button type="button" onclick="alert('SUCCESSFULL')" id="button">ORDER</button>
+
+  <script>
+    function changeQty(btn, change) {
+      const qtySpan = btn.parentElement.querySelector('.qty');
+      let qty = parseInt(qtySpan.textContent);
+      qty = Math.max(1, qty + change);
+      qtySpan.textContent = qty;
+
+      updateTotal();
+    }
+
+    function updateTotal() {
+      let total = 0;
+      document.querySelectorAll('.cart-item').forEach(item => {
+        const price = parseInt(item.getAttribute('data-price'));
+        const qty = parseInt(item.querySelector('.qty').textContent);
+        total += price * qty;
+      });
+      document.getElementById('total').textContent = total.toLocaleString() + '₮';
+    }
+  </script>
+
+</body>
+</html>
